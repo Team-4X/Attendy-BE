@@ -4,6 +4,8 @@ dotenv.config();
 
 const uri = "mongodb+srv://" + process.env.MONGO_DB_USERNAME + ":" + process.env.MONGO_DB_PASSWORD + process.env.MONGO_DB_URL;
 
+mongoose.set('strictQuery', false);
+
 async function connect () {
     try {
         await mongoose.connect(uri);
