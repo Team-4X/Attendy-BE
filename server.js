@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const routes = require("./routes/index");
 const bodyParser = require("body-parser");
+const connect = require("./db");
 
 dotenv.config();
 
@@ -18,6 +19,8 @@ app.get("/", (req, res) => {
 });
 
 // connect to the database
+connect();
+
 // listen on port 
 app.listen(PORT, () => {
     console.log(`Server is running at https://localhost:${PORT}`);
