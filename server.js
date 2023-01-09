@@ -17,6 +17,7 @@ app.get("/", (req, res) => {
     res.send("hello world!");
     console.log("all is well!");
 });
+app.use("/", routes);
 
 // connect to the database
 connect();
