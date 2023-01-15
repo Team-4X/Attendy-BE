@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const routes = require("./routes/index");
 const bodyParser = require("body-parser");
 const connect = require("./db");
+const cors = require('cors');
 
 dotenv.config();
 
@@ -12,6 +13,7 @@ const PORT = 4000;
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cors());
 
 app.get("/", (req, res) => {
     res.send("hello world!");

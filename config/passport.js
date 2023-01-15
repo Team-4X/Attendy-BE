@@ -1,6 +1,7 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const Admin = require('../models/Admin');
+const validatePassword = require('../lib/passwordUtils').validatePassword;
 
 const verifyCallback = (username, password, done) => {
     Admin.findOne({ username: username })
@@ -8,7 +9,7 @@ const verifyCallback = (username, password, done) => {
         // if there is no admin with that username
         if (!admin) { return done(null, false) }
 
-        const isValid = validPassword(password, admin.hash, admin.salt);
+        const isValid = validatePassword(password, admin.hash, admin.salt);
 
         // is password is validated we return the admin (null is to mean there are no errors)
         // if it's not validated, we return false in the place of admin
