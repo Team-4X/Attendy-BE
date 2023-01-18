@@ -10,7 +10,7 @@ exports.register = async (req, res) => {
   const hash = saltHash.hash;
 
   const newAdmin = new Admin({
-    username: req.body.username,
+    username: req.body.userID,
     hash: hash,
     salt: salt,
     name: req.body.name
@@ -21,10 +21,12 @@ exports.register = async (req, res) => {
   .then((admin) => {
     console.log(admin);
   });
-  res.json('hello');
 }
-exports.login = async (req, res) => {
-  passport.authenticate('local', { failureRedirect: '/login', successRedirect: '/home'});
+
+exports.login = async (req, res, next) => {
+  // passport.authenticate('local', { failureRedirect: '/login', successRedirect: '/home' });
+  console.log("in the login auth controller");
+  console.log("after running passport.authenticate");
 }
 
 exports.loginGet = async (req, res) => {

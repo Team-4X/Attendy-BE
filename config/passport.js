@@ -3,6 +3,11 @@ const LocalStrategy = require('passport-local').Strategy;
 const Admin = require('../models/Admin');
 const validatePassword = require('../lib/passwordUtils').validatePassword;
 
+const customFields = {
+    usernameField: 'username',
+    passwordField: 'hash'
+};
+
 const verifyCallback = (username, password, done) => {
     Admin.findOne({ username: username })
     .then((admin) => {
