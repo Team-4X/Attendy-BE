@@ -1,32 +1,64 @@
-const passport = require('passport');
-const { generateHash } = require('../lib/passwordUtils');
+const { generateHash, validatePassword } = require('../lib/passwordUtils');
 const Admin = require('../models/Admin');
+let jwt = require('jsonwebtoken');
 
 exports.register = async (req, res) => {
   console.log('register backend!');
-  console.log(req.body);
+
   const saltHash = generateHash(req.body.password);
   const salt = saltHash.salt;
   const hash = saltHash.hash;
+  const email = req.body.email;
+
+  const existingAdmin = await Admin.findOne({email});
+  console.log(existingAdmin);
+
+  if (existingAdmin) {
+    res.status(406).json({message: "User already exists."});
+    return;
+  }
 
   const newAdmin = new Admin({
     username: req.body.userID,
     hash: hash,
     salt: salt,
+    email: email,
     name: req.body.name
   });
-  console.log(newAdmin);
   // testing 
-  newAdmin.save()
-  .then((admin) => {
-    console.log(admin);
-  });
+  // newAdmin.save()
+  // .then((admin) => {
+  //   res.status(201).json({message: "Admin account created!"});
+  // });
 }
 
-exports.login = async (req, res, next) => {
-  // passport.authenticate('local', { failureRedirect: '/login', successRedirect: '/home' });
-  console.log("in the login auth controller");
-  console.log("after running passport.authenticate");
+exports.login = async (req, res) => {
+  const {username, password} = req.body;
+
+  const adminExists = await Admin.findOne({username}).select("+salt +hash");
+
+  if (!adminExists) {
+    res.status(404).json({message: "User doesn't exists."});
+    return;
+  }
+
+  console.log(adminExists);
+  const matched = await validatePassword(password, adminExists.hash, adminExists.salt);
+
+  if (!matched) {
+    res.status(404).json({message: "User doesn't exists."});
+    return;
+  }
+
+  // create the JWT token 2:50
+  const payLoad = {
+    username: adminExists.username,
+    _id: adminExists._id
+  }
+
+  const token = jwt.sign(payLoad, process.env.SECRET);
+  // console.log(token);
+  res.json({message: 'successfully logged in!', token});
 }
 
 exports.loginGet = async (req, res) => {
