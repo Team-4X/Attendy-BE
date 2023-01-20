@@ -1,8 +1,9 @@
-const staff = require("../models/staff");
+const Staff = require("../models/Staff");
 const objectId = require("mongodb");
 
 exports.index = async (req, res) => {
-    console.log("");
-    const staffMembers = await staff.find();
-    res.jason(staffMembers);
+    console.log("fghxfghn");
+    const staffMembers = await Staff.find();
+    console.log(staffMembers);
+    res.json(staffMembers);
 };

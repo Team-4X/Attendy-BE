@@ -8,7 +8,7 @@ mongoose.set('strictQuery', false);
 
 async function connect () {
     try {
-        await mongoose.connect(uri);
+        await mongoose.connect(uri, {dbName: "attendy-ams"});
         console.log("Connected to the database!");
     } catch (err) {
         console.error(err);
