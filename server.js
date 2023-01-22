@@ -37,7 +37,9 @@ app.get("/",
     console.log("all is well!");
 });
 app.use("/", routes);
-
+app.get('*', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/client/public/index.html'));
+});
 
 // listen on port 
 app.listen(PORT, () => {

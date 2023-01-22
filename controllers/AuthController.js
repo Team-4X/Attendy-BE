@@ -26,10 +26,10 @@ exports.register = async (req, res) => {
     name: req.body.name
   });
   // testing 
-  // newAdmin.save()
-  // .then((admin) => {
-  //   res.status(201).json({message: "Admin account created!"});
-  // });
+  newAdmin.save()
+  .then((admin) => {
+    res.status(201).json({message: "Admin account created!"});
+  });
 }
 
 exports.login = async (req, res) => {
