@@ -1,5 +1,6 @@
 const JwtStrategy = require("passport-jwt").Strategy;
 const ExtractJwt = require("passport-jwt").ExtractJwt;
+const Admin = require("../models/Admin");
 
 let opts = {};
 
@@ -8,7 +9,7 @@ opts.secretOrKey = process.env.SECRET;
 
 const passportStrategy = (passport) => {
 passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
-    User.findById({id: jwt_payload._id}, function(err, user) {
+    Admin.findById(jwt_payload._id, function(err, user) {
         if (err) {
             return done(err, false);
         }

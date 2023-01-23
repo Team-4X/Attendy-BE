@@ -23,11 +23,11 @@ passportConfig(passport);
 // connect to the database
 connect();
 
-app.use((req, res, next) => {
-    console.log(req.session);
-    console.log(req.user);
-    next();
-})
+// app.use((req, res, next) => {
+    // console.log(req.session);
+    // console.log(req.user);
+    // next();
+// })
 
 // testing passport authentication 
 app.get("/", 
@@ -37,9 +37,9 @@ app.get("/",
     console.log("all is well!");
 });
 app.use("/", routes);
-app.get('*', (req,res) =>{
-    res.sendFile(path.join(__dirname+'/client/public/index.html'));
-});
+// app.get('*', (req,res) =>{
+//     res.sendFile(path.join(__dirname+'/client/public/index.html'));
+// });
 
 // listen on port 
 app.listen(PORT, () => {
