@@ -58,7 +58,7 @@ exports.login = async (req, res) => {
 
   const token = jwt.sign(payLoad, process.env.SECRET);
   // console.log(token);
-  res.json({message: 'successfully logged in!', token});
+  res.json({message: 'successfully logged in!', token, user: adminExists});
 }
 
 exports.loginGet = async (req, res) => {

@@ -9,7 +9,7 @@ authRouter.post('/login', authController.login);
 authRouter.get("/register", passport.authenticate("jwt", {session: false}), (req, res) => {
 	res.send("register page");
 })
-authRouter.get("/user", passport.authenticate("jwt", {session: false}), adminController.index);
+// authRouter.get("/user", passport.authenticate("jwt", {session: false}), adminController.index);
 
 
 // authRouter.get("/login", passport.authenticate('local', { failureRedirect: 'http://localhost:3000', successRedirect: 'http://localhost:3000/about' }));
