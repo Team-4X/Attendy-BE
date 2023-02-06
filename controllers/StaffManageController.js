@@ -55,11 +55,27 @@ exports.findTeachers = async (req, res) => {
 		});
 	} else if (req.body.staffID == null && req.body.name !== null) {
 		searchParameter = req.body.name;
-			Staff.find({name: {$regex: searchParameter, $options: 'i'}}, (err, teacher) => {
+		Staff.find({name: {$regex: searchParameter, $options: 'i'}}, (err, teacher) => {
 			if (err) console.log(err);
 			else res.send({
 				data: teacher
 			});
 		});
 	}
+}
+exports.editTeachers = async (req, res) => {
+	console.log(req.body);
+	console.log("------------");
+	
+	Staff.findByIdAndUpdate(req.body.id, {
+		name: req.body.new_name,
+		id: req.body.new_id,
+	},
+	{new: true}, (err, result) => {
+		if (err) {
+			console.error(err);
+			return res.status(500).send(err);
+		}
+		res.status(200).send(result);
+	});
 }
