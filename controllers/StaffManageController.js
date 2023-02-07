@@ -64,8 +64,6 @@ exports.findTeachers = async (req, res) => {
 	}
 }
 exports.editTeachers = async (req, res) => {
-	console.log(req.body);
-	console.log("------------");
 	
 	Staff.findByIdAndUpdate(req.body.id, {
 		name: req.body.new_name,
