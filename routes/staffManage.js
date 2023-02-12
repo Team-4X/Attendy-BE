@@ -8,5 +8,6 @@ staffManageRouter.delete("/delTeachers", staffManageController.delTeachers);
 staffManageRouter.post("/addTeachers", staffManageController.addTeachers);
 staffManageRouter.post("/findTeachers", staffManageController.findTeachers);
 staffManageRouter.put("/editTeachers", staffManageController.editTeachers);
+staffManageRouter.post("/loginTeacher", staffManageController.loginTeacher);
 
 module.exports = staffManageRouter;

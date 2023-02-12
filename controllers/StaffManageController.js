@@ -77,3 +77,15 @@ exports.editTeachers = async (req, res) => {
 		res.status(200).send(result);
 	});
 }
+exports.loginTeacher = async (req, res) => {
+	const staffId = req.body.id;
+	const teacher = await Staff.findOne({id: staffId});
+	// if the user exists
+	if (teacher) {
+		const password = req.body.password;
+		const loggedTeacher = validatePassword(password, teacher.hash, teacher.salt);
+		res.status(200).send(loggedTeacher);
+	} else {
+		console.log("User doesn't exist");
+	}
+}
