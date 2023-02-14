@@ -3,5 +3,6 @@ const attendanceRouter = express.Router();
 const attendanceController = require("../controllers/AttendanceController");
 
 attendanceRouter.post("/getClass", attendanceController.getClass);
+attendanceRouter.post("/markAttendance", attendanceController.markAttendance);
 
 module.exports = attendanceRouter;
