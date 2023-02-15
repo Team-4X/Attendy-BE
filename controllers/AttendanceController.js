@@ -1,5 +1,7 @@
 const Student = require("../models/Student");
 const StudentAttendance = require("../models/StudentAttendance");
+const Teacher = require("../models/Staff");
+const TeacherAttendance = require("../models/TeacherAttendance");
 
 // this will get and generate the current date in the
 // format year-month-day
@@ -45,8 +47,32 @@ exports.markAttendance = async(req, res) => {
 		});
 	} else {
 		await newDocument.save()
-		.then((doc) => console.log(doc));
+		// .then((doc) => console.log(doc));
 		console.log("saved a new one!");
 	}
+
+}
+
+// marking attendance of teachers
+exports.markTeacherAttendance = async (req, res) => {
+	const teacher = await Teacher.findOne({id: req.body.id})
+
+	const newDocument = new TeacherAttendance({
+		teacherID: teacher._id,
+		date: currentDate,
+		teacherName: teacher.name,
+		attendance: "present"
+	});
+
+	const existingDoc = await TeacherAttendance.findOne({teacherID: teacher._id, date: currentDate});
+
+	if (existingDoc) {
+		console.log("already saved!");
+	} else {
+		await newDocument.save()
+		// .then((doc) => console.log(doc));
+		console.log("marked teacher attendance!");
+	}
+
 
 }
