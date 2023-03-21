@@ -1,13 +1,12 @@
 const mongoose = require("mongoose");
 
-const AttendanceStudentSchema = new mongoose.Schema({
+const StudentAttendanceSchema = new mongoose.Schema({
   studentID: {
     type: String,
     required: true,
   },
   date: {
-    type: [Date],
-    default: [],
+    type: String,
     required: true,
   },
   attendance: {
@@ -16,4 +15,8 @@ const AttendanceStudentSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("student attendance", AttendanceStudentSchema);
+module.exports = mongoose.model(
+  "StudentAttendance",
+  StudentAttendanceSchema,
+  "student attendance"
+);
