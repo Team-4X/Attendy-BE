@@ -1,5 +1,8 @@
+const Admin = require("../models/Admin");
+
 exports.index = async(req, res) => {
     // console.log(req.body);
     console.log('howdy from test controller!');
-    res.send("<h1>Howdy from test Route</h1>");
+    const admins = await Admin.find();
+    res.json(admins);
 }
