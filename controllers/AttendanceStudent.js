@@ -1,22 +1,26 @@
 const AttendanceStudent = require("../models/AttendanceStudent");
 
 //get attendance student
+const findAttendanceStudent = async (req, res) => {
+  const { studentId } = req.params;
 
-exports.findAttendanceStudent = async (req, res) => {
-  const studentId = req.body.studentID;
   console.log(studentId);
+
   try {
-    // find all attendance records for the student with the given ID
-    const attendanceRecords = await AttendanceStudent.find({ _id: studentId });
-    console.log(attendanceRecords);
-    // log each attendance record individually to the console
-    attendanceRecords.forEach((record) => {
-      console.log(record);
-    });
-    // return the attendance records in the response body
-    res.json(attendanceRecords);
+    // Find all attendance documents related to the student ID
+    const attendance = await AttendanceStudent.find({ studentID: studentId });
+
+    // If no attendance data found for the student ID
+    if (attendance.length === 0) {
+      return res.status(404).json({ message: "Attendance data not found" });
+    }
+
+    // Send the attendance data as a response
+    res.status(200).json(attendance);
   } catch (error) {
-    // if an error occurs while retrieving the attendance records, return a 500 Internal Server Error
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
+
+module.exports = { findAttendanceStudent };

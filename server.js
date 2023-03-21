@@ -1,6 +1,10 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const routes = require("./routes/index");
+const {
+  attendanceRouter,
+  studentRouter,
+  testRouter,
+} = require("./routes/index");
 const bodyParser = require("body-parser");
 const connect = require("./db");
 const cors = require("cors");
@@ -18,7 +22,9 @@ app.get("/", (req, res) => {
   console.log("all is well!");
 });
 app.use(cors());
-app.use("/", routes);
+app.use("/v1/attendence/", attendanceRouter);
+app.use("/v1/student/", studentRouter);
+app.use("/v1/test/", testRouter);
 
 // connect to the database
 connect();
