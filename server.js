@@ -3,7 +3,7 @@ const dotenv = require("dotenv");
 const routes = require("./routes/index");
 const bodyParser = require("body-parser");
 const connect = require("./db");
-
+const cors = require("cors");
 dotenv.config();
 
 // get port from env file
@@ -14,15 +14,16 @@ const app = express();
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-    res.send("hello world!");
-    console.log("all is well!");
+  res.send("hello world!");
+  console.log("all is well!");
 });
+app.use(cors());
 app.use("/", routes);
 
 // connect to the database
 connect();
 
-// listen on port 
+// listen on port
 app.listen(PORT, () => {
-    console.log(`Server is running at https://localhost:${PORT}`);
-})
+  console.log(`Server is running at https://localhost:${PORT}`);
+});
