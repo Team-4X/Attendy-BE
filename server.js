@@ -22,7 +22,7 @@ app.get("/", (req, res) => {
   console.log("all is well!");
 });
 app.use(cors());
-app.use("/v1/attendence/", attendanceRouter);
+app.use("/v1/attendance/", attendanceRouter);
 app.use("/v1/student/", studentRouter);
 app.use("/v1/test/", testRouter);
 

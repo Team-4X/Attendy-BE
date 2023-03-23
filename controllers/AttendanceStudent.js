@@ -4,7 +4,7 @@ const AttendanceStudent = require("../models/AttendanceStudent");
 const findAttendanceStudent = async (req, res) => {
   const { studentId } = req.params;
 
-  console.log(studentId);
+  //console.log(studentId);
 
   try {
     // Find all attendance documents related to the student ID
