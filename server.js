@@ -3,6 +3,9 @@ const dotenv = require("dotenv");
 const routes = require("./routes/index");
 const bodyParser = require("body-parser");
 const connect = require("./db");
+const cors = require('cors');
+const passport = require('passport');
+const passportConfig = require('./config/passport');
 
 dotenv.config();
 
@@ -22,16 +25,32 @@ app.use((req, res, next) => {
     next();
 });
 
-app.get("/", (req, res) => {
-    res.send("hello world!");
-    console.log("all is well!");
-});
-app.use("/", routes);
+app.use(cors());
+app.use(passport.initialize());
+passportConfig(passport);
 
 // connect to the database
 connect();
 
-// listen on port 
+// app.use((req, res, next) => {
+    // console.log(req.session);
+    // console.log(req.user);
+    // next();
+// })
+
+// testing passport authentication
+// app.get("/",
+//     passport.authenticate("jwt", {session: false}),
+//     (req, res) => {
+//     res.send("hello world!");
+//     console.log("all is well!");
+// });
+app.use("/", routes);
+// app.get('*', (req,res) =>{
+//     res.sendFile(path.join(__dirname+'/client/public/index.html'));
+// });
+
+// listen on port
 app.listen(PORT, () => {
     console.log(`Server is running at https://localhost:${PORT}`);
 })
