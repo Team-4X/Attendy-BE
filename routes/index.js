@@ -9,7 +9,7 @@ const attendanceRouter = require('./attendance');
 const contactUsRouter = require('./contactUs');
 
 // define routers
-router.use("/staff-attendance", attendanceRouter);
+router.use("/staff-attendance", attendanceTeacherRouter);
 router.use("/user", userRouter);
 router.use("/auth", authRouter);
 router.use("/staff", manageStaffRouter);
