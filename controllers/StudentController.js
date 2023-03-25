@@ -12,10 +12,8 @@ const Student = require("../models/Student");
 //retrieve all student
 exports.findAll = (req, res) => {
   Student.find((err, students) => {
+    console.log(students);
     if (err) return res.status(500).send(err);
     return res.status(200).send(students);
   });
 };
-
-
-

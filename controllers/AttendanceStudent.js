@@ -1,5 +1,5 @@
 const AttendanceStudent = require("../models/AttendanceStudent");
-
+const StudentDetails = require("../models/Student");
 //get attendance student
 const findAttendanceStudent = async (req, res) => {
   const { studentId } = req.params;
@@ -9,7 +9,9 @@ const findAttendanceStudent = async (req, res) => {
   try {
     // Find all attendance documents related to the student ID
     const attendance = await AttendanceStudent.find({ studentID: studentId });
-
+    console.log(attendance);
+    //Find student name and class
+    //const studentDetails = await StudentDetails.find({})
     // If no attendance data found for the student ID
     if (attendance.length === 0) {
       return res.status(404).json({ message: "Attendance data not found" });
