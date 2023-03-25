@@ -12,9 +12,9 @@ const Student = require("../models/Student");
 
 //retrieve all student
 exports.findStudent = async (req, res) => {
-  const studentId = req.body.studentID;
-
-  //console.log(studentId);
+  const { studentId } = req.params;
+  //console.log(req.body);
+  console.log("studentid", studentId);
 
   //get student details
 

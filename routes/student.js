@@ -6,6 +6,6 @@ const { findStudent } = require("../controllers/StudentController");
 //router.get("/:id", findById);
 
 //get all student
-router.get("/", findStudent);
+router.get("/:studentId", findStudent);
 
 module.exports = router;
