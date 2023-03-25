@@ -10,18 +10,17 @@ const Student = require("../models/Student");
 //   });
 // };
 
-//retrieve all student
+//retrieve  student by Id
 exports.findStudent = async (req, res) => {
   const { studentId } = req.params;
   //console.log(req.body);
-  console.log("studentid", studentId);
 
   //get student details
 
   try {
     // Find all student details related to the student ID
     const student = await Student.findOne({ studentID: studentId });
-    console.log(student);
+    //console.log(student);
     //Find student name and class
     //const studentDetails = await StudentDetails.find({})
     // If no attendance data found for the student ID

@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
-
+const { Schema } = mongoose;
 const StudentAttendanceSchema = new mongoose.Schema({
   studentID: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: "Student",
     required: true,
   },
   date: {
