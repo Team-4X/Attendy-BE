@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { Schema } = mongoose;
 const StudentAttendanceSchema = new mongoose.Schema({
   studentID: {
     type: String,

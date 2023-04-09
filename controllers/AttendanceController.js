@@ -1,5 +1,5 @@
 const Student = require("../models/Student");
-const StudentAttendance = require("../models/StudentAttendance");
+const AttendanceStudent = require("../models/AttendanceStudent");
 const Teacher = require("../models/Staff");
 const TeacherAttendance = require("../models/TeacherAttendance");
 
@@ -22,14 +22,14 @@ exports.getClass = async(req, res) => {
 // marking attendance of students
 exports.markAttendance = async(req, res) => {
 
-	const newDocument = new StudentAttendance({
+	const newDocument = new AttendanceStudent({
 		studentID: req.body.data.student._id,
 		date: currentDate,
 		attendance: req.body.data.attendance
 	});
 
 	// checking if a document with the same student ID and same date exists
-	const existingDoc = await StudentAttendance.findOne({studentID: req.body.data.student._id, date: currentDate});
+	const existingDoc = await AttendanceStudent.findOne({studentID: req.body.data.student._id, date: currentDate});
 
 
 	// if there is a document with the same student id and date
@@ -37,7 +37,7 @@ exports.markAttendance = async(req, res) => {
 	// else we need to create a new document.
 	if (existingDoc) {
 		console.log("update it!");
-		StudentAttendance.findByIdAndUpdate(existingDoc._id, {
+		AttendanceStudent.findByIdAndUpdate(existingDoc._id, {
 			attendance: req.body.data.attendance
 		}, (err, updated) => {
 			if (err) console.log(err);
