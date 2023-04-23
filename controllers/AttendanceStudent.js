@@ -10,7 +10,7 @@ exports.findByDate = async (req, res) => {
     //console.log(attendanceDocuments);
 
     // Check if any attendance data was found
-    if (!attendanceDocuments) {
+    if (attendanceDocuments.length === 0) {
       return res.status(404).json({ message: "Attendance data not found" });
     }
 
