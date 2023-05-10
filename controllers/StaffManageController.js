@@ -1,9 +1,9 @@
 const { generateHash, validatePassword } = require('../lib/passwordUtils');
 const Staff = require("../models/Staff");
 
-exports.register = async (req, res) => {
-	console.log("Let's register a fucking staff member.");
-}
+// exports.register = async (req, res) => {
+// 	console.log("Let's register a staff member.");
+// }
 exports.getTeachers = async (req, res) => {
 	const teachers = await Staff.find();
 	console.log('all is well');
@@ -77,6 +77,7 @@ exports.editTeachers = async (req, res) => {
 		res.status(200).send(result);
 	});
 }
+
 exports.loginTeacher = async (req, res) => {
 	const staffId = req.body.id;
 	const teacher = await Staff.findOne({id: staffId});
@@ -87,5 +88,6 @@ exports.loginTeacher = async (req, res) => {
 		res.status(200).send(loggedTeacher);
 	} else {
 		console.log("User doesn't exist");
-	}
+	} 
+	
 }

@@ -2,7 +2,7 @@ const express = require("express");
 const staffManageRouter = express.Router();
 const staffManageController = require("../controllers/StaffManageController");
 
-staffManageRouter.post("/manage", staffManageController.register);
+// staffManageRouter.post("/manage", staffManageController.register);
 staffManageRouter.get("/getTeachers", staffManageController.getTeachers);
 staffManageRouter.delete("/delTeachers", staffManageController.delTeachers);
 staffManageRouter.post("/addTeachers", staffManageController.addTeachers);

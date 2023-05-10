@@ -9,6 +9,8 @@ const attendanceRouter = require('./attendance');
 const contactUsRouter = require('./contactUs');
 const studentRouter = require("./student");
 const studentAttendanceRouter = require("./attendanceStudent");
+const studentManageRouter=require('./StudentManage')
+
 // define routers
 router.use("/staff-attendance", attendanceTeacherRouter);
 router.use("/user", userRouter);
@@ -18,5 +20,6 @@ router.use("/attendance", attendanceRouter);
 router.use("/contactus", contactUsRouter);
 router.use("/student", studentRouter);
 router.use("/find-AttendanceStudent", studentAttendanceRouter);
+router.use("/student",studentManageRouter);
 
 module.exports = router;
