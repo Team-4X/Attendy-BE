@@ -3,8 +3,8 @@ const Student = require("../models/Student");
 
 
 exports.getStudent = async (req, res) => {
-	const student = await Student.find();
 	console.log('all is well');
+	const student = await Student.find();
 	res.json(student);
 }
 exports.delStudent = async (req, res) => {

@@ -18,8 +18,8 @@ router.use("/auth", authRouter);
 router.use("/staff", manageStaffRouter);
 router.use("/attendance", attendanceRouter);
 router.use("/contactus", contactUsRouter);
+router.use("/students",studentManageRouter);
 router.use("/student", studentRouter);
 router.use("/find-AttendanceStudent", studentAttendanceRouter);
-router.use("/student",studentManageRouter);
 
 module.exports = router;
