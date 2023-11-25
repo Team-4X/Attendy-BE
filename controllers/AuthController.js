@@ -3,7 +3,6 @@ const Admin = require('../models/Admin');
 let jwt = require('jsonwebtoken');
 
 exports.register = async (req, res) => {
-  console.log('register backend!');
 
   const saltHash = generateHash(req.body.password);
   const salt = saltHash.salt;
@@ -25,17 +24,26 @@ exports.register = async (req, res) => {
     email: email,
     name: req.body.name
   });
-  // testing 
-  newAdmin.save()
-  .then((admin) => {
-    res.status(201).json({message: "Admin account created!"});
-  });
+  // testing
+  try {
+    newAdmin.save()
+    .then((admin) => {
+      res.status(201).json({message: "Admin account created!"});
+    });
+  } catch (e) {
+    console.error(e);
+  }
 }
 
 exports.login = async (req, res) => {
   const {username, password} = req.body;
 
-  const adminExists = await Admin.findOne({username}).select("+salt +hash");
+  let adminExists = false;
+  try {
+    adminExists = await Admin.findOne({username}).select("+salt +hash");
+  } catch (e) {
+    console.error(e);
+  }
 
   if (!adminExists) {
     res.status(404).json({message: "User doesn't exists."});
