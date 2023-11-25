@@ -1,18 +1,23 @@
-const mongoose = require("mongoose");
+const { Schema, default: mongoose } = require("mongoose");
 
-const staffSchema = new mongoose.Schema({
-    name:{
-        type:String,
-        required:true
-    },
-    id:{
-        type:String,
-        required:true
-    },
-    hash:{
-        type:String,
-        required:true
-    }
-});
+const staffSchema = new Schema({
+  name: {
+    type: String,
+  },
+  id: {
+    type: String,
+  },
+  hash: {
+    type: String,
+  },
+  salt: {
+    type: String,
+  }
+},
+{
+  timestamps: true
+}
+);
 
-module.exports = mongoose.model("Staff", staffSchema, "teachers");
+
+module.exports = mongoose.model('Teacher', staffSchema, "teachers");
