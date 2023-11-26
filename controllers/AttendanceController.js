@@ -36,19 +36,13 @@ exports.markAttendance = async(req, res) => {
 	// we need to update it
 	// else we need to create a new document.
 	if (existingDoc) {
-		console.log("update it!");
 		AttendanceStudent.findByIdAndUpdate(existingDoc._id, {
 			attendance: req.body.data.attendance
 		}, (err, updated) => {
-			if (err) console.log(err);
-			else {
-				console.log("updated");
-			}
+			if (err) console.error(err);
 		});
 	} else {
 		await newDocument.save()
-		// .then((doc) => console.log(doc));
-		console.log("saved a new one!");
 	}
 
 }
@@ -70,9 +64,24 @@ exports.markTeacherAttendance = async (req, res) => {
 		console.log("already saved!");
 	} else {
 		await newDocument.save()
-		// .then((doc) => console.log(doc));
-		console.log("marked teacher attendance!");
 	}
 
 
+}
+
+exports.getAttendanceCounts = async (req, res) => {
+	try {
+		const today = new Date().toLocaleDateString('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit' });
+		const staffAttendance = await TeacherAttendance.find({date: today});
+		const studentAttendance = await AttendanceStudent.find({date: today, attendance: 'present'});
+
+		if (staffAttendance && studentAttendance) {
+			const staffCount = staffAttendance.length;
+			const studentCount = studentAttendance.length;
+
+			return res.status(200).json({staffCount: staffCount, studentCount: studentCount});
+		}
+	} catch (error) {
+		console.error(error);
+	}
 }
