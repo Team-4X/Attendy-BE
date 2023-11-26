@@ -5,15 +5,10 @@ const Staff = require("../models/Staff");
 const findAttendanceTeacher = async (req, res) => {
   const { teacherId } = req.params;
 
-console.log(teacherId);
-
-
   try {
 
     const teacher = await Staff.findOne({id: teacherId});
-    console.log(teacher);    
     const attendance = await AttendanceTeacher.find({ teacherID: teacher._id });
-    console.log(attendance);
 
   
     if (attendance.length === 0) {

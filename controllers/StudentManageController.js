@@ -3,7 +3,6 @@ const Student = require("../models/Student");
 
 
 exports.getStudent = async (req, res) => {
-	console.log('all is well');
 	const student = await Student.find();
 	res.json(student);
 }
@@ -17,7 +16,6 @@ exports.delStudent = async (req, res) => {
 	}
 }
 exports.addStudents = async (req, res) => {                                      
-    console.log (req.body)
 	const newStudent = new Student({
 		studentname: req.body.name,
 		studentID: req.body.id,
@@ -41,7 +39,6 @@ exports.findStudents = async (req, res) => {
 		Student.find({studentID: {$regex: searchParameter, $options: 'i'}}, (err, student) => {
 			if (err) console.log(err);
 			else {
-					console.log(student);
 					res.send({
 					data: student
 				});

@@ -27,7 +27,6 @@ app.use((req, res, next) => {
 
 app.get("/", (req, res) => {
     res.send("hello world!");
-    console.log("all is well!");
 });
 
 app.use(cors());
