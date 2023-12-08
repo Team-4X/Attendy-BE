@@ -19,6 +19,17 @@ exports.getClass = async(req, res) => {
 	res.status(200).json(students);
 }
 
+exports.getClassList = async(req, res) => {
+	const classes = [];
+	const students = await Student.find();
+	if (students) {
+		students.forEach(student => {
+			classes.push(student.class)
+		})
+	}
+	res.status(200).json(classes);
+}
+
 // marking attendance of students
 exports.markAttendance = async(req, res) => {
 
