@@ -21,12 +21,14 @@ exports.getClass = async(req, res) => {
 
 exports.getClassList = async(req, res) => {
 	const classes = [];
+	const tempSet = new Set();
 	const students = await Student.find();
 	if (students) {
 		students.forEach(student => {
-			classes.push(student.class)
+			tempSet.add(student.class)
 		})
 	}
+	tempSet.forEach(val => classes.push(val))
 	res.status(200).json(classes);
 }
 
