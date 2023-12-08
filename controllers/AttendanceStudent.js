@@ -22,7 +22,6 @@ exports.findByDate = async (req, res) => {
       const student = await Student.findOne({
         _id: attendanceDocument.studentID,
       });
-      console.log("student:", student);
       if (!student) {
         console.log(
           `Student not found for ID: ${attendanceDocument.studentID}`

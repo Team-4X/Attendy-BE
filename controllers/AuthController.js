@@ -10,7 +10,6 @@ exports.register = async (req, res) => {
   const email = req.body.email;
 
   const existingAdmin = await Admin.findOne({email});
-  console.log(existingAdmin);
 
   if (existingAdmin) {
     res.status(406).json({message: "User already exists."});
@@ -50,7 +49,6 @@ exports.login = async (req, res) => {
     return;
   }
 
-  console.log(adminExists);
   const matched = await validatePassword(password, adminExists.hash, adminExists.salt);
 
   if (!matched) {

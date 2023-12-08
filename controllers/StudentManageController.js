@@ -69,17 +69,3 @@ exports.editStudents = async (req, res) => {
 		res.status(200).send(result);
 	});
 }
-/*
-exports.loginStudent = async (req, res) => {
-	const studentId = req.body.id;
-	const student = await student.findOne({id: Student});
-	// if the user exists
-	if (student) {
-		const password = req.body.password;
-		const loggedStudent = validatePassword(password, Student.hash, Student.salt);
-		res.status(200).send(loggedStudent);
-	} else {
-		console.log("User doesn't exist");
-	}
-}
-*/

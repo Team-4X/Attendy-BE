@@ -1,12 +1,8 @@
 const { generateHash, validatePassword } = require('../lib/passwordUtils');
 const Staff = require("../models/Staff");
 
-// exports.register = async (req, res) => {
-// 	console.log("Let's register a staff member.");
-// }
 exports.getTeachers = async (req, res) => {
 	const teachers = await Staff.find();
-	console.log('all is well');
 	res.json(teachers);
 }
 exports.delTeachers = async (req, res) => {
@@ -47,7 +43,6 @@ exports.findTeachers = async (req, res) => {
 		Staff.find({id: {$regex: searchParameter, $options: 'i'}}, (err, teacher) => {
 			if (err) console.log(err);
 			else {
-					console.log(teacher);
 					res.send({
 					data: teacher
 				});
